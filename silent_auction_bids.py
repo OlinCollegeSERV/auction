@@ -1,9 +1,6 @@
 import csv
-
-def mergesort(category):
-    pass
  
-sample = open('FinalLiveAuction.csv', "rb")
+sample = open('FinalSilentAuction.csv', "rb")
 readSample = csv.reader(sample)
  
 f = open('servsheets.tex','w')
