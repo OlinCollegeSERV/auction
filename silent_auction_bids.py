@@ -9,12 +9,12 @@ def addDollarSign(amt):
 def handleLatexChars(s):
     return s.replace("$","\\$").replace("&","\\&").replace("#","\\#").replace("^","\\^")
 
-sample = open('FinalSilentAuction.csv', "rb")
+sample = open('2013/FinalSilentAuction.csv', "rb")
 readSample = csv.reader(sample)
  
-f = open('servsheets.tex','w')
-g = open('servpacket.tex','w')
- 
+f = open('2013/servsheets.tex','w')
+g = open('2013/servpacket.tex','w')
+
 print >>f, "\\documentclass[11pt]{article}"
 print >>f, "\\pagestyle{plain} \\topmargin -.5in \oddsidemargin 0in"
 print >>f, "\\evensidemargin 0in \\textwidth 6.5in \\textheight 8in"
@@ -60,10 +60,10 @@ for (i,category) in enumerate(categories):
         print >>f, "Starting Bid: "+handleLatexChars(addDollarSign(item[3]))
         print >>f, "\\newline"
         print >>f, handleLatexChars(item[4]).rstrip() # description
-        print >>f, "\\\\[3ex]"
+        print >>f, "\\\\[6ex]"
         print >>f, "\\begin{tabular}{c c c}"
         print >>f, "~~~~~~~~~~~~~Name~~~~~~~~~~~~~ & ~~~~~~~~~Bid (\$)~~~~~~~~~  & ~~~Email Address (if not standard olin.edu)~~~\\"+"\\"
-        for a in range(19): # print lines for bids
+        for a in range(26): # print lines for bids
             print >>f, " & & \\"+"\\"
             print >>f, "\hline"
         print >>f, "\\end{tabular}"
