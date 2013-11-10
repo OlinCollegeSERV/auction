@@ -1,4 +1,7 @@
 import csv
+
+def mergesort(category):
+    pass
  
 sample = open('FinalLiveAuction.csv', "rb")
 readSample = csv.reader(sample)
@@ -11,35 +14,38 @@ print >>f, "\evensidemargin 0in \\textwidth 6.5in \\textheight 8in"
 print >>f, "\setlength{\parindent}{0in}"
 print >>f, "\\begin{document}"
 
-categories = [[],[],[],[],[]]
+categories = [[],[],[],[],[],[],[]]
  
 for item in readSample:
-    if (item[5] == ""):
+    if (item[5] == "Business Donations"):
         categories[0].append(item)
-    elif (item[5] == ""):
+    elif (item[5] == "Arts and Crafts"):
         categories[1].append(item)
-    elif (item[5] == ""):
+    elif (item[5] == "Events"):
         categories[2].append(item)
-    elif (item[5] == ""):
+    elif (item[5] == "Food"):
         categories[3].append(item)
-    elif (item[5] == ""):
+    elif (item[5] == "Lessons"):
         categories[4].append(item)
+    elif (item[5] == "Services"):
+        categories[5].append(item)
+    elif (item[5] == "Miscellaneous"):
+        categories[6].append(item)
 
-for category in categories:
-    for item in category:
-        #print item[1]+"\n"
-        print >>f, "\section{"+item[2]+"}"
-        print >>f, item[0]
-        print >>f, "\\newline"
+for (i,category) in enumerate(categories): 
+    category = sorted(category,key=lambda item: int(item[3].lstrip('$'))) # sort by minimum bid, lowest to highest
+    for (j,item) in enumerate(category):
+        print >>f, "\section*{"+str(i)+"."+str(j)+" "+item[2]+"}" # title
+        print >>f, item[0] # name
+        print >>f, "\\\\"
         print >>f, "Starting Bid: \\"+item[3]
         print >>f, "\\newline"
-        print >>f, item[4]
-        print >>f, "\\newline"
-        print >>f, "\\newline"
+        print >>f, item[4].rstrip().replace("$","\\$") # escape $s in the description
+        print >>f, "\\\\[3ex]"
         print >>f, "\\begin{tabular}{c c c}"
-        print >>f, "~~~~~~~~~~~~~Name~~~~~~~~~~~~~ & ~~~~~~~~~Bid~~~~~~~~~  & ~~~~~~~~~~~~~Email Address (if different name or not standard olin.edu)~~~~~~~~~~~~~\\"+"\\"
-        for a in range(19):
-            print >>f, " & & & \\"+"\\"
+        print >>f, "~~~~~~~~~~~~~Name~~~~~~~~~~~~~ & ~~~~~~~~~Bid (\$)~~~~~~~~~  & ~~~Email Address (if not standard olin.edu)~~~\\"+"\\"
+        for a in range(19): # print lines for bids
+            print >>f, " & & \\"+"\\"
             print >>f, "\hline"
         print >>f, "\\end{tabular}"
         print >>f, "\\newpage"
