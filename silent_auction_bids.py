@@ -1,5 +1,14 @@
 import csv
  
+def addDollarSign(amt):
+    if amt[0] == '$':
+        return amt
+    else:
+        return '$'+amt
+
+def handleLatexChars(s):
+    return s.replace("$","\\$").replace("&","\\&").replace("#","\\#").replace("^","\\^")
+
 sample = open('FinalSilentAuction.csv', "rb")
 readSample = csv.reader(sample)
  
@@ -30,14 +39,14 @@ for item in readSample:
         categories[6].append(item)
 
 for (i,category) in enumerate(categories): 
-    category = sorted(category,key=lambda item: int(item[3].lstrip('$'))) # sort by minimum bid, lowest to highest
+    category = sorted(category,key=lambda item: float(item[3].lstrip('$'))) # sort by minimum bid, lowest to highest
     for (j,item) in enumerate(category):
-        print >>f, "\section*{"+str(i)+"."+str(j)+" "+item[2]+"}" # title
-        print >>f, item[0] # name
+        print >>f, "\section*{"+str(i+1)+"."+str(j+1)+" "+handleLatexChars(item[2])+"}" # title
+        print >>f, handleLatexChars(item[0]) # name
         print >>f, "\\\\"
-        print >>f, "Starting Bid: \\"+item[3]
+        print >>f, "Starting Bid: "+handleLatexChars(addDollarSign(item[3]))
         print >>f, "\\newline"
-        print >>f, item[4].rstrip().replace("$","\\$") # escape $s in the description
+        print >>f, handleLatexChars(item[4]).rstrip() # description
         print >>f, "\\\\[3ex]"
         print >>f, "\\begin{tabular}{c c c}"
         print >>f, "~~~~~~~~~~~~~Name~~~~~~~~~~~~~ & ~~~~~~~~~Bid (\$)~~~~~~~~~  & ~~~Email Address (if not standard olin.edu)~~~\\"+"\\"
