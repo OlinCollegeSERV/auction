@@ -11,18 +11,18 @@ def addDollarSign(amt):
 def handleLatexChars(s):
     return s.replace("$","\\$").replace("&","\\&").replace("#","\\#").replace("^","\\^")
 
-sample = open('2013/FinalLiveAuction.csv', "rb")
+sample = open('2014/FinalLiveAuction.csv', "rb")
 readSample = csv.reader(sample)
 
-f = open('2013/live.tex','w')
+f = open('2014/live.tex','w')
 
 print >>f, "\documentclass[11pt]{article}"
 print >>f, "\pagestyle{plain} \\topmargin -.5in \oddsidemargin 0in"
 print >>f, "\evensidemargin 0in \\textwidth 6.5in \\textheight 8in"
 print >>f, "\setlength{\parindent}{0in}"
 print >>f, "\\title{Live Auction Donation Packet}"
-print >>f, "\\author{SERV Auction 2013}"
-print >>f, "\\date{November 15th, 2013}"
+print >>f, "\\author{SERV Auction 2014}"
+print >>f, "\\date{November 14th, 2014}"
 print >>f, "\\begin{document}"
 print >>f, "\\maketitle"
 
