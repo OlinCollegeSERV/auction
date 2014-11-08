@@ -12,7 +12,7 @@ def handleLatexChars(s):
     return s.replace("$","\\$").replace("&","\\&").replace("#","\\#").replace("^","\\^")
 
 sample = open('2014/FinalLiveAuction.csv', "rb")
-readSample = csv.reader(sample)
+readSample = csv.reader(sample,delimiter='|',quotechar='%')
 
 f = open('2014/live.tex','w')
 
