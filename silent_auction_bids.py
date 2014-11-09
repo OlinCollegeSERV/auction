@@ -1,4 +1,4 @@
-# KNOWN ANOMALIES: "\^\^" at the end of a line is not valid Latex (needs to not be escaped), but "^" must be escaped everywhere else. Odd edge case.
+# KNOWN ANOMALIES: "\^\^" is not valid Latex (needs to not be escaped), but "^" must be escaped everywhere else. Odd edge case.
 
 import csv
  
@@ -9,7 +9,7 @@ def addDollarSign(amt):
         return '$'+amt
 
 def handleLatexChars(s):
-    return s.replace("$","\\$").replace("&","\\&").replace("#","\\#").replace("^","\\^").replace("_","\\_")
+    return s.replace("$","\\$").replace("&","\\&").replace("#","\\#").replace("^","\\^").replace("_","\\_").replace("\^\^","^^")
 
 sample = open('2014/FinalSilentAuction.csv', "rb")
 readSample = csv.reader(sample,delimiter='|',quotechar='%')
