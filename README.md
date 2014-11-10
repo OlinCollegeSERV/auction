@@ -1,4 +1,3 @@
-SERV-Auction
-============
+SERV Auction Python Files
+=========================
 
-Python script (and resulting output LaTeX/PDF files) for generating the SERV auction packet and bidding sheets.
