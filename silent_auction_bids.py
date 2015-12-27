@@ -9,13 +9,13 @@ def addDollarSign(amt):
         return '$'+amt
 
 def handleLatexChars(s):
-    return s.replace("$","\\$").replace("&","\\&").replace("#","\\#").replace("^","\\^").replace("_","\\_").replace("\^\^","^^")
+    return s.replace("$","\\$").replace("&","\\&").replace("#","\\#").replace("^","\\^").replace("_","\\_").replace("\^\^","^^").replace("%","\\%").replace(">", "\\textgreater ").replace("<", "\\textless ")
 
-sample = open('2014/FinalSilentAuction.csv', "rb")
-readSample = csv.reader(sample,delimiter='|',quotechar='%')
+sample = open('2015/FinalSilentAuction.csv', "rb")
+readSample = csv.reader(sample, delimiter='|', quotechar='"')
  
-f = open('2014/servsheets.tex','w')
-g = open('2014/servpacket.tex','w')
+f = open('2015/servsheets.tex','w')
+g = open('2015/servpacket.tex','w')
 
 print >>f, "\\documentclass[11pt]{article}"
 print >>f, "\\pagestyle{plain} \\topmargin -.5in \oddsidemargin 0in"
@@ -28,13 +28,13 @@ print >>g, "\\pagestyle{plain} \\topmargin -.5in \oddsidemargin 0in"
 print >>g, "\\evensidemargin 0in \\textwidth 6.5in \\textheight 8in"
 print >>g, "\\setlength{\parindent}{0in}"
 print >>g, "\\title{Silent Auction Donation Packet}"
-print >>g, "\\author{SERV Auction 2014}"
-print >>g, "\\date{November 10th, 2014 to November 14th, 2014}"
+print >>g, "\\author{SERV Auction 2015}"
+print >>g, "\\date{November 9th, 2015 to November 13th, 2015}"
 print >>g, "\\begin{document}"
 print >>g, "\\maketitle"
 
-categories = [[],[],[],[],[],[],[]]
-categoryNames = ["Business Donations","Arts and Crafts","Events","Food","Lessons","Services","Miscellaneous"]
+categories = [[],[],[],[],[],[],[],[]]
+categoryNames = ["Business Donations","Arts and Crafts","Events","Food","Lessons","Services","Miscellaneous","Faculty and Staff"]
  
 for item in readSample:
     if (item[5] == categoryNames[0]):
@@ -51,6 +51,8 @@ for item in readSample:
         categories[5].append(item)
     elif (item[5] == categoryNames[6]):
         categories[6].append(item)
+    elif (item[5] == categoryNames[7]):
+        categories[7].append(item)
 
 for (i,category) in enumerate(categories): 
     category = sorted(category,key=lambda item: float(item[3].lstrip('$').rstrip('$'))) # sort by minimum bid, lowest to highest
