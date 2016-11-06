@@ -16,7 +16,7 @@ print >>f, "\\setlength{\parindent}{0in}"
 print >>f, "\\begin{document}"
 
 print >>g, "\\documentclass[11pt]{article}"
-print >>g, "\\pagestyle{plain} \\topmargin -.5in \oddsidem argin 0in"
+print >>g, "\\pagestyle{plain} \\topmargin -.5in \oddsidemargin 0in"
 print >>g, "\\evensidemargin 0in \\textwidth 6.5in \\textheight 8in"
 print >>g, "\\setlength{\parindent}{0in}"
 print >>g, "\\title{Silent Auction Donation Packet}"
@@ -56,11 +56,15 @@ for (i, category) in enumerate(categories):
         # affiliation = item[3]
         title       = item[4]
         # category    = item[5]
-        # interestFor = item[6]
+        interestFor = item[6]
         # isForLive   = item[7]
         startingBid = item[8]
         description = item[9]
         numWinners  = item[10]
+
+        # Enable Alumni only filter.
+        if 'Alumni' not in interestFor:
+            continue
 
         print >>f, "\section*{"+str(i+1)+"."+str(j+1)+" "+handleLatexChars(title)+"}" # title
         print >>f, handleLatexChars(personName) # name
